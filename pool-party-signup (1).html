@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Pool Party Sign-Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --cream:  #FFF8EE;
+    --ink:    #3D2B1A;
+    --sun:    #F5C84C;
+    --tangerine: #F2743A;
+    --tang-deep: #C9501D;
+    --aqua:   #4BBFC9;
+    --aqua-deep: #2E96A0;
+    --lime:   #7DB960;
+    --rose:   #E8667A;
+    --line:   rgba(61, 43, 26, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--cream); }
+
+  body {
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(245, 200, 76, 0.22), transparent 45%),
+      radial-gradient(ellipse at 100% 0%, rgba(75, 191, 201, 0.18), transparent 45%),
+      radial-gradient(ellipse at 50% 100%, rgba(242, 116, 58, 0.14), transparent 50%),
+      var(--cream);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    line-height: 1.6;
+    padding-bottom: 30px;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 14px;
+    background: linear-gradient(90deg, var(--sun), var(--tangerine), var(--rose), var(--aqua), var(--lime), var(--sun));
+    z-index: 50;
+  }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 52px 0 8px; text-align: center; }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--tang-deep);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 48px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+  }
+
+  .sub-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(15px, 2.1vw, 18px);
+    color: var(--aqua-deep);
+    margin-top: 12px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h2.section {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 18px;
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  .panel {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #FFFDF5;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--tangerine);
+    padding: 24px 26px 8px;
+  }
+  .panel .hint { font-size: 14.5px; opacity: 0.8; margin-bottom: 20px; }
+
+  form { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 22px; }
+  .field-full { grid-column: 1 / -1; }
+  label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tang-deep); margin-bottom: 6px; }
+  input[type=text], select {
+    width: 100%; padding: 10px 12px; font-size: 15px; font-family: 'Karla', sans-serif;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  input[type=text]:focus, select:focus { outline: none; border-color: var(--aqua); box-shadow: 0 0 0 3px rgba(75,191,201,.18); }
+
+  .add-btn {
+    grid-column: 1 / -1;
+    background: var(--tangerine); color: #FFF8EE; border: none;
+    padding: 13px 18px; font-size: 14px; font-weight: 700; font-family: 'Karla', sans-serif;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: background .15s ease;
+  }
+  .add-btn:hover { background: var(--tang-deep); }
+  .add-btn:disabled { opacity: .55; cursor: default; }
+
+  .categories { display: flex; flex-direction: column; gap: 16px; margin-top: 6px; }
+  .cat-card { background: #FFFDF5; border: 1px solid var(--line); padding: 18px 22px 20px; }
+  .cat-card.main    { border-top: 4px solid var(--tangerine); }
+  .cat-card.side    { border-top: 4px solid var(--lime); }
+  .cat-card.drink   { border-top: 4px solid var(--aqua); }
+  .cat-card.dessert { border-top: 4px solid var(--rose); }
+
+  .cat-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .cat-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--tang-deep);
+  }
+  .cat-card.side .cat-title    { color: #5C8A44; }
+  .cat-card.drink .cat-title   { color: var(--aqua-deep); }
+  .cat-card.dessert .cat-title { color: #C24961; }
+  .count {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px; background: rgba(61,43,26,0.08); color: var(--ink);
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 8px 16px; border-radius: 100px; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; color: #fff;
+  }
+  .chip.main    { background: var(--tangerine); }
+  .chip.side    { background: var(--lime); }
+  .chip.drink   { background: var(--aqua); }
+  .chip.dessert { background: var(--rose); }
+  .chip .who { font-weight: 500; opacity: 0.9; font-size: 12px; }
+  .meal-tag {
+    background: rgba(255,255,255,0.32); font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .chip button {
+    background: none; border: none; cursor: pointer; color: #fff; opacity: 0.75;
+    font-size: 14px; line-height: 1; padding: 0; margin-left: 2px;
+  }
+  .chip button:hover { opacity: 1; }
+  .empty { font-size: 14px; opacity: 0.7; font-style: italic; padding: 4px 0; }
+
+  footer { text-align: center; font-size: 13px; opacity: 0.7; margin-top: 36px; padding-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Pool party &amp; BBQ</p>
+    <h1>Bring something, save a spot in the shade</h1>
+    <p class="sub-tag">Chicken, ribs, cocktails and mocktails are covered. Sign up below with what you're bringing so we don't end up with five loaves of "fresh bread".</p>
+  </header>
+</div>
+
+<div class="wrap">
+
+  <h2 class="section">Add your dish</h2>
+
+  <div class="panel">
+    <p class="hint">Pick a category and be specific — "Greek salad" beats "salad". If it's for lunch or breakfast instead of the evening BBQ, flag that under "For".</p>
+    <form id="signup-form">
+      <div>
+        <label for="name">Your name</label>
+        <input type="text" id="name" placeholder="Jordan" required>
+      </div>
+      <div>
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="main">Main dish</option>
+          <option value="side">Side dish</option>
+          <option value="drink">Drink</option>
+          <option value="dessert">Dessert</option>
+        </select>
+      </div>
+      <div>
+        <label for="meal">For</label>
+        <select id="meal">
+          <option value="bbq">The BBQ (evening)</option>
+          <option value="lunch">Lunch instead</option>
+          <option value="breakfast">Breakfast instead</option>
+        </select>
+      </div>
+      <div class="field-full">
+        <label for="item">What you're bringing</label>
+        <input type="text" id="item" placeholder="Greek salad" required>
+      </div>
+      <button type="submit" class="add-btn" id="submit-btn">Add to the list</button>
+    </form>
+  </div>
+
+  <div class="categories" id="categories">
+    <div class="cat-card main">
+      <div class="cat-head">
+        <div class="cat-title">Mains</div>
+        <span class="count" id="count-main">0</span>
+      </div>
+      <div class="chips" id="chips-main"></div>
+    </div>
+    <div class="cat-card side">
+      <div class="cat-head">
+        <div class="cat-title">Side dishes</div>
+        <span class="count" id="count-side">0</span>
+      </div>
+      <div class="chips" id="chips-side"></div>
+    </div>
+    <div class="cat-card drink">
+      <div class="cat-head">
+        <div class="cat-title">Drinks</div>
+        <span class="count" id="count-drink">0</span>
+      </div>
+      <div class="chips" id="chips-drink"></div>
+    </div>
+    <div class="cat-card dessert">
+      <div class="cat-head">
+        <div class="cat-title">Desserts</div>
+        <span class="count" id="count-dessert">0</span>
+      </div>
+      <div class="chips" id="chips-dessert"></div>
+    </div>
+  </div>
+
+  <footer>Signed up by mistake? Tap the &times; on your chip to remove it.</footer>
+</div>
+
+<script>
+const STORAGE_KEY = 'signups';
+const CATS = ['main','side','drink','dessert'];
+let items = [];
+
+const SEED = [
+  {id:'seed-1', name:'Olivia', item:'BBQ chicken', category:'main', meal:'bbq'},
+  {id:'seed-2', name:'Olivia', item:'Ribs', category:'main', meal:'bbq'},
+  {id:'seed-3', name:'Olivia', item:'Corn bread', category:'side', meal:'bbq'},
+  {id:'seed-4', name:'Olivia', item:'Cocktails', category:'drink', meal:'bbq'},
+  {id:'seed-5', name:'Olivia', item:'Mocktails', category:'drink', meal:'bbq'}
+];
+
+function uid(){
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+}
+
+async function loadItems(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    items = res && res.value ? JSON.parse(res.value) : [];
+  }catch(e){
+    items = [];
+  }
+  if(items.length === 0){
+    items = SEED.slice();
+    await saveItems();
+  }
+  render();
+}
+
+async function saveItems(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(items), true);
+  }catch(e){
+    console.error('Could not save', e);
+  }
+}
+
+function render(){
+  CATS.forEach(cat=>{
+    const list = items.filter(i=>i.category===cat);
+    document.getElementById('count-'+cat).textContent = list.length;
+    const container = document.getElementById('chips-'+cat);
+    if(list.length===0){
+      container.innerHTML = '<p class="empty">Nothing signed up yet — be the first.</p>';
+      return;
+    }
+    container.innerHTML = list.map(i=>`
+      <div class="chip ${cat}">
+        <span>${escapeHtml(i.item)}</span>
+        <span class="who">— ${escapeHtml(i.name)}</span>
+        ${i.meal && i.meal !== 'bbq' ? `<span class="meal-tag">${i.meal === 'lunch' ? 'Lunch' : 'Breakfast'}</span>` : ''}
+        <button aria-label="Remove" data-id="${i.id}">&times;</button>
+      </div>
+    `).join('');
+  });
+
+  document.querySelectorAll('.chip button').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.getAttribute('data-id');
+      items = items.filter(i=>i.id!==id);
+      render();
+      await saveItems();
+    });
+  });
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+document.getElementById('signup-form').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const nameEl = document.getElementById('name');
+  const itemEl = document.getElementById('item');
+  const catEl = document.getElementById('category');
+  const mealEl = document.getElementById('meal');
+  const name = nameEl.value.trim();
+  const item = itemEl.value.trim();
+  const category = catEl.value;
+  const meal = mealEl.value;
+  if(!name || !item) return;
+
+  const submitBtn = document.getElementById('submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Adding…';
+
+  items.push({id: uid(), name, item, category, meal});
+  render();
+  await saveItems();
+
+  itemEl.value = '';
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Add to the list';
+});
+
+loadItems();
+</script>
+
+</body>
+</html>
